@@ -1,0 +1,55 @@
+---
+# [API documentation in yaml format]
+# template_request:
+#   host: "https://xxx.xxx.xxx/"
+#   route: "api/xxx/"
+#   # Supported Types: "GET", "POST"
+#   method: "GET"
+#   params:
+#     query1:
+#     query2:
+#   auth:
+#     # Supported Types: "Basic Auth", "Bearer Token"
+#     type: "Basic Auth"
+#     content: ["HIDE_AUTH_USER", "HIDE_AUTH_PASS"]
+#   headers:
+#     Authorization: "HIDE_HEADER_TOKEN"
+#     Content-Type: "application/json"
+#   payload:
+#     # Supported Types: "raw"
+#     type: "raw"
+#     body: {{ json-strings }}
+#
+# [some annotations]
+# 1. [HINT] gopkg.in/yaml.v3 pkg does not support the '-' format of YAML!
+#
+# 2. Query params:
+#    If the value is not <nil>, you can use it directly. If it's <nil>,
+#    the corresponding value will be generated in the service layer code.
+#
+# 3. Hide fields:
+#    Some sensitive information, such as auth token, login password, ip
+#    address, etc., needs to be read from the os env variable of vm/pod.
+#    The os.Getenv func is used here, so please keep it consistent with
+#    the env variable name, so that the program cannot find your value.
+#
+# 4. Show or hide the '/' at the end of the route according to your needs.
+#
+# 5. TODO: The POST(body/payload) http request function to be extended.
+#
+
+baidu_baike:
+  host: "http://baike.baidu.com/"
+  route: "/api/openapi/BaikeLemmaCardApi"
+  method: "get"
+  params: {scope: "103", format: "json", appid: "379020", bk_key: , bk_length: "1000"}
+  headers: {Content-Type: "application/json"}
+
+post_auth:
+  host: "https://xxx.xxxxx.xxx/"
+  route: "/api/auth"
+  method: "post"
+  headers: {Authorization: "HIDE_HEADER_TOKEN", Content-Type: "application/json"}
+  payload: {}
+
+...
